@@ -18,7 +18,7 @@ function getData() {
 async function loadMap() {
     // Hide the search & existing map
     const searchDiv = document.querySelector(".container-mainFHR");
-    searchDiv.remove();
+    searchDiv?.remove();
 
     // Get the data
     const data = getData();
@@ -28,6 +28,15 @@ async function loadMap() {
     const mapDiv = document.createElement("div");
     mapDiv.id = "map";
     mainContent.append(mapDiv);
+
+    var map = L.map('map').setView([51.505, -0.09], 3);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    console.log(map);
 
 
 

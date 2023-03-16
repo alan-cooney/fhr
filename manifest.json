@@ -6,11 +6,11 @@
     "content_scripts": [
         {
             "css": [
-                "leaflet.css",
+                "leaflet/leaflet.css",
                 "styles.css"
             ],
             "js": [
-                "leaflet.js",
+                "leaflet/leaflet.js",
                 "content.js"
             ],
             "matches": [

@@ -5,3 +5,13 @@
 .show-all {
     background: green;
 }
+
+#body, .content-wrapper {
+    height: calc(100vh - 70px);
+    margin-top: 70px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
