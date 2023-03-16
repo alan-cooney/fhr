@@ -21,8 +21,7 @@ function getData() {
  */
 function loadMap(data) {
     // Hide the search & existing map
-    const searchDiv = document.querySelector(".container-mainFHR");
-    searchDiv?.remove();
+    document.querySelector(".mapform")?.remove();
 
     // Create a google map placeholder div
     const mainContent = document.querySelector("#body div.main-content");
@@ -42,7 +41,7 @@ function loadMap(data) {
         // Images
         const iconImage = chrome.runtime.getURL("leaflet/images/marker-icon.png");
         const propertyImage = "https://www.americanexpress.com/en-us/travel/discover/photos" + point.ImageForMap
-        const propertyPrefix = "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/Mystery/PropertyFHR"
+        const propertyPrefix = `https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/Mystery/Property${point.Program}`
         const propertyURL = `${propertyPrefix}?amid=${point.AmexId}&shopId=${point.Id}`
 
         const iconPopup = L.popup().setContent(
@@ -79,8 +78,17 @@ function loadMap(data) {
  * Show all properties on a map
  */
 async function runShowAll() {
+    console.log("running");
+    // Nav
+    // chrome.tabs.update({ url: "http://www.baidu.com" });
+    // const thcURL = "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/Mystery/Map?program=THC";
+    // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    //     chrome.tabs.update(tabs[0].id, { url: thcURL });
+    // });
+
     // Get the data
     const data = getData();
+    console.log(data);
 
     // Load the map
     loadMap(data);
@@ -109,4 +117,4 @@ function addShowAllButton() {
 }
 
 // Add the button to the navbar
-addShowAllButton()
+runShowAll()

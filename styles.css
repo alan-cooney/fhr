@@ -1,14 +1,14 @@
-/* .container-mainFHR {
-    display: none;
-} */
-
 .show-all {
     background: green;
 }
 
+.mapform {
+    display: none;
+}
+
 #body, .content-wrapper {
     height: calc(100vh - 70px);
-    margin-top: 70px;
+    margin-top: 0px;
 }
 
 #map {

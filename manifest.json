@@ -14,7 +14,8 @@
                 "content.js"
             ],
             "matches": [
-                "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/*"
+                "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/Mystery/Map?program=FHR",
+                "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/Mystery/Map?program=THC"
             ]
         }
     ],
