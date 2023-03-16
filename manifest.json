@@ -29,8 +29,5 @@
                 "https://www.americanexpress.com/*"
             ]
         }
-    ],
-    "permissions": [
-        "tabs"
     ]
 }

@@ -75,46 +75,37 @@ function loadMap(data) {
 }
 
 /**
- * Show all properties on a map
+ * Replace the map with a better one
  */
-async function runShowAll() {
-    console.log("running");
-    // Nav
-    // chrome.tabs.update({ url: "http://www.baidu.com" });
-    // const thcURL = "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/Mystery/Map?program=THC";
-    // chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    //     chrome.tabs.update(tabs[0].id, { url: thcURL });
-    // });
-
+async function replaceMap() {
     // Get the data
     const data = getData();
-    console.log(data);
 
     // Load the map
     loadMap(data);
 }
 
-/**
- * Add a "Show All" button to the navbar
- */
-function addShowAllButton() {
-    // Get the navigation bar links
-    const navLinks = document.querySelector("#navigation ul.newnav");
-    if (!navLinks) return;
+// /**
+//  * Add a "Show All" button to the navbar
+//  */
+// function addShowAllButton() {
+//     // Get the navigation bar links
+//     const navLinks = document.querySelector("#navigation ul.newnav");
+//     if (!navLinks) return;
 
-    // Create a "Show all" link
-    const showAll = document.createElement("li");
-    showAll.className = "show-all";
-    const showAllLink = document.createElement("a");
-    showAllLink.className = "linkFhr"
-    // showAllLink.href = "#";
-    showAllLink.innerHTML = "Show All";
-    showAllLink.onclick = runShowAll;
-    showAll.append(showAllLink);
+//     // Create a "Show all" link
+//     const showAll = document.createElement("li");
+//     showAll.className = "show-all";
+//     const showAllLink = document.createElement("a");
+//     showAllLink.className = "linkFhr"
+//     // showAllLink.href = "#";
+//     showAllLink.innerHTML = "Show All";
+//     showAllLink.onclick = replaceMap;
+//     showAll.append(showAllLink);
 
-    // Add it to the navbar
-    navLinks.prepend(showAll)
-}
+//     // Add it to the navbar
+//     navLinks.prepend(showAll)
+// }
 
 // Add the button to the navbar
-runShowAll()
+replaceMap()
