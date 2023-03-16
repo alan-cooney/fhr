@@ -18,6 +18,17 @@
             ]
         }
     ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "leaflet/images/marker-icon.png",
+                "leaflet/images/marker-icon-2x.png"
+            ],
+            "matches": [
+                "https://www.americanexpress.com/*"
+            ]
+        }
+    ],
     "permissions": [
         "tabs"
     ]

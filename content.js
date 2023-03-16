@@ -1,3 +1,6 @@
+/**
+ * Get all properties from a page (either FHR or THC)
+ */
 function getData() {
     // The map data is stored in the last script
     const scripts = document.querySelectorAll("script");
@@ -10,18 +13,16 @@ function getData() {
     // Parse the plain text to get a JSON again
     const properties = JSON.parse(propertiesString);
 
-    console.log(properties);
     return properties;
 }
 
-
-async function loadMap() {
+/**
+ * Load the map with all the properties
+ */
+function loadMap(data) {
     // Hide the search & existing map
     const searchDiv = document.querySelector(".container-mainFHR");
     searchDiv?.remove();
-
-    // Get the data
-    const data = getData();
 
     // Create a google map placeholder div
     const mainContent = document.querySelector("#body div.main-content");
@@ -29,46 +30,60 @@ async function loadMap() {
     mapDiv.id = "map";
     mainContent.append(mapDiv);
 
-    var map = L.map('map').setView([51.505, -0.09], 3);
-
+    // Create the map
+    var map = L.map('map').setView([0, 0], 3);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    console.log(map);
+    // Set the data as pins
+    data.map(point => {
+        // Images
+        const iconImage = chrome.runtime.getURL("leaflet/images/marker-icon.png");
+        const propertyImage = "https://www.americanexpress.com/en-us/travel/discover/photos" + point.ImageForMap
+        const propertyPrefix = "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/Mystery/PropertyFHR"
+        const propertyURL = `${propertyPrefix}?amid=${point.AmexId}&shopId=${point.Id}`
 
+        const iconPopup = L.popup().setContent(
+            `<a href="${propertyURL}">
+                <div class="popup-contents">
+                    <img src="${propertyImage}" width="315" height="210" />
+                    
+                    <p class="popup-text">
+                        <strong>${point.HotelName}</strong>
+                        <br />
+                        ${point.City}, ${point.Country}<br/>
+                    </p>
+                </div>
+            </a>
+            `);
 
+        const icon = L.icon({
+            iconUrl: iconImage,
+            iconSize: [25, 41],
+            iconAnchor: [13, 40],
+            popupAnchor: [0, -40],
+            className: "icon-regular"
+        });
 
-    // Add the map
-    // const mappingLib = await import("https://unpkg.com/leaflet@1.9.3/dist/leaflet.js");
-    // console.log(mappingLib);
-
-
-
-    // function initMap() {
-    //     // The location of Uluru
-    //     const uluru = { lat: -25.344, lng: 131.031 };
-    //     // The map, centered at Uluru
-    //     const map = new google.maps.Map(document.getElementById("map"), {
-    //         zoom: 4,
-    //         center: uluru,
-    //     });
-    //     // The marker, positioned at Uluru
-    //     const marker = new google.maps.Marker({
-    //         position: uluru,
-    //         map: map,
-    //     });
-    // }
-
-    // initMap();
-
+        L.marker([point.Latitude, point.Longitude], {
+            title: point.HotelName,
+            riseOnHover: true,
+            icon: icon
+        }).bindPopup(iconPopup).addTo(map);
+    })
 }
 
+/**
+ * Show all properties on a map
+ */
+async function runShowAll() {
+    // Get the data
+    const data = getData();
 
-
-function runShowAll() {
-    loadMap();
+    // Load the map
+    loadMap(data);
 }
 
 /**
@@ -93,4 +108,5 @@ function addShowAllButton() {
     navLinks.prepend(showAll)
 }
 
+// Add the button to the navbar
 addShowAllButton()
