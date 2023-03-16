@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "FH&R Helper",
+    "version": "0.1.0",
+    "description": "Don't share.",
+    "content_scripts": [
+        {
+            "css": [
+                "leaflet.css",
+                "styles.css"
+            ],
+            "js": [
+                "leaflet.js",
+                "content.js"
+            ],
+            "matches": [
+                "https://www.americanexpress.com/en-us/business/tls/partnerships/mystery-shop/*"
+            ]
+        }
+    ],
+    "permissions": [
+        "tabs"
+    ]
+}
